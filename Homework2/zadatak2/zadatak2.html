@@ -1,0 +1,205 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+<style>
+    .container {
+        display: flex;
+        /*justify-content: space-between;*/
+    }
+    .content{
+        display: flex;
+        /*margin-left: 27%;*/
+        width: 580px;;
+        background-color: #d9e2da;
+        border-radius: 20px;
+        padding: 12px;
+        margin-left: 25%;
+    }
+    .list-buttons > div{
+        background-color: #f1f1f1;
+        width: 100px;
+        border-radius: 20px;
+        margin: 10px;
+        text-align: center;
+        line-height: 75px;
+        font-size: 30px;
+        box-shadow: 4px 0 6px #acbbac;
+    }
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 53px;
+        height: 26px;
+        bottom: 17px;
+        left: 40px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 19px;
+        width: 19px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #54DB41;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+    .settings-content{
+        margin-left: 13%;
+    }
+    .switch-power{
+        margin-left: 43px;
+    }
+    .switch-bank{
+        margin-left: 47px;
+    }
+    .name-bank{
+        padding: 9px 15px 9px 15px;
+        border: 1px solid #78c8a3;
+        background: #e8e9e7;
+        margin-right: 2%;
+        width: 100px;
+        text-align: center;
+    }
+
+    .slider-volume {
+        -webkit-appearance: none;
+        width: 128px;
+        height: 9px;
+        background: #717171;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .5s;
+        transition: opacity .2s;
+    }
+
+    /*.slider-volume:hover {*/
+        /*opacity: 1;*/
+    /*}*/
+
+    .slider-volume::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 50px;
+        height: 25px;
+        background: red;
+        cursor: pointer;
+    }
+
+    .slider-volume::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: white;
+        cursor: pointer;
+        border-radius:20px;
+    }
+    .volume-range{
+        margin-left: 40px;
+    }
+
+
+
+</style>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="content">
+        <div class="list-buttons">
+            <div onclick="getSound('Q')">Q</div>
+            <div onclick="getSound('A')">A</div>
+            <div onclick="getSound('Z')">Z</div>
+        </div>
+        <div class="list-buttons">
+            <div onclick="getSound('W')">W</div>
+            <div onclick="getSound('S')">S</div>
+            <div onclick="getSound('X')">X</div>
+        </div>
+        <div class="list-buttons">
+            <div onclick="getSound('E')">E</div>
+            <div onclick="getSound('D')">D</div>
+            <div onclick="getSound('C')">C</div>
+        </div>
+
+        <div class="settings-content">
+            <h4 class="switch-power">Power</h4>
+            <label class="switch ">
+                <input type="checkbox"
+                       onchange="isChecked()"
+                       id ="power-slider" >
+                <span class="slider round"></span>
+            </label>
+
+            <div class="name-bank">
+                <span id="nameSound">Name bank</span>
+            </div>
+
+            <h4 class="volume-range">Volume</h4>
+            <input type="range" min="0" max="2" onchange="setVolume(value)" step="0.02" value="0.5" class="slider-volume" id="myRange">
+
+            <h4 class="switch-bank" >Bank</h4>
+            <label class="switch">
+                <input type="checkbox"
+                       onchange="isCheckedBankOne()"
+                       id ="bankId"
+                       >
+                <span class="slider round"></span>
+            </label>
+
+
+
+        </div>
+
+        <div>
+            <audio id="audio" src="" autoplay="false" ></audio>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script src="zadatak2.js"></script>
+</body>
+</html>
