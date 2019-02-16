@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
+
+        * {
+            box-sizing: border-box;
+            font-family: "Roboto", "Helvetica Neue", sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-product,
+        .list-products,
+        .shopping-cart {
+            width: 33.33%;
+            height: 100vh;
+            overflow: scroll;
+        }
+
+        .add-product {
+            padding: 30px;
+        }
+
+        .add-product form div {
+            margin-bottom: 15px;
+        }
+
+        .add-product label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+        }
+
+        .add-product input,
+        .add-product textarea {
+            width: 100%;
+            border: 1px solid #eee;
+            background: #fff;
+            border-radius: 3px;
+            padding: 8px;
+            font-size: 14px;
+            outline: none;
+            letter-spacing: .5px;
+        }
+
+        .add-product button {
+            width: 100%;
+            border: none;
+            border-radius: 3px;
+            margin-top: 15px;
+            background: #0A9CE9;
+            color: #fff;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: 100;
+        }
+
+        .list-products {
+            padding: 30px;
+            background: #F6F7F9;
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+            margin-bottom: 20px;
+        }
+
+        .product img {
+            width: 60%;
+        }
+
+        .product p {
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .details-button,
+        .buy-button,
+        .shopping-cart-summary button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #eee;
+            color: #666;
+            font-weight: 100;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .details-button:hover,
+        .buy-button:hover {
+            transition: opacity .3s ease-in;
+            opacity: .7;
+        }
+
+        .details-button {
+            background: transparent;
+        }
+
+        .buy-button,
+        .shopping-cart-summary button {
+            background: #44E19F;
+            color: #fff;
+            border: none;
+        }
+
+        .shopping-cart {
+            position: relative;
+            padding: 20px;
+        }
+
+        .shopping-cart-product {
+            margin-bottom: 10px;
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            width: 100%;
+            box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+            border-radius: 3px;
+        }
+
+        .product-info img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .product-info div h3{
+            font-weight: 100;
+            margin-bottom: -10px;
+        }
+
+        .product-count {
+            display: inline-block;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(0,0,0,.08);
+            margin-top: -30px;
+        }
+
+        .product-count button {
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid #eee;
+            border-radius: 3px;
+        }
+
+        .shopping-cart-summary {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
+
+        .shopping-cart-summary button {
+            padding: 10px;
+        }
+        .modal-class{
+            display: none;
+            /*position: fixed; !* Stay in place *!*/
+            /*z-index: 1; !* Sit on top *!*/
+            /*left: 0;*/
+            /*top: 0;*/
+            /*width: 100%; !* Full width *!*/
+            /*height: 100%; !* Full height *!*/
+            /*overflow: auto; !* Enable scroll if needed *!*/
+            /*background-color: rgb(0,0,0); !* Fallback color *!*/
+            /*background-color: rgba(0,0,0,0.4); !* Black w/ opacity *!*/
+
+            position: fixed;
+
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            /*display: flex;*/
+            align-items: center;
+            justify-content: center;
+
+            background-color: transparent;
+            overflow: hidden;
+            /*transition: background-color*/
+
+        }
+        .modal-class > .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="add-product">
+        <form id = "form">
+            <div>
+                <label>Product name:</label>
+                <input id = "jo" type="text" placeholder="Casio Watch" />
+            </div>
+
+            <div>
+                <label>Product description:</label>
+                <textarea placeholder="Sample description..."></textarea>
+            </div>
+
+            <div>
+                <label>Product image:</label>
+                <input id="image" onchange="uploadFIle()" type="file" placeholder="http://...jpg" />
+            </div>
+
+            <div>
+                <label>Product price:</label>
+                <input type="number" min="0" placeholder="33.50" />
+            </div>
+
+            <button onclick="addProduct(event)">Add</button>
+        </form>
+    </div>
+
+    <div class="list-products" >
+
+
+    </div>
+    <div class="modal-class">
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+
+    <div class="shopping-cart">
+        <div class="shopping-cart-products">
+            <div class="shopping-cart-product">
+                <div class="product-info">
+                    <div>
+                        <h3>Sample Watch</h3>
+                        <p>$199 &times; 1</p>
+                    </div>
+                    <img src="https://sc02.alicdn.com/kf/HTB1gHRfg6uhSKJjSspmq6AQDpXaI/Accept-Sample-Design-Your-Own-Blank-Wrist.jpg_350x350.jpg" />
+                </div>
+                <div class="product-count">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="shopping-cart-summary">
+            <div>Total: <b>$429</b></div>
+            <div><button>Purchase</button></div>
+        </div>
+    </div>
+</div>
+<script src="zadatak1.js"></script>
+</body>
+
+</html>
