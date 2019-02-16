@@ -112,10 +112,6 @@
         transition: opacity .2s;
     }
 
-    /*.slider-volume:hover {*/
-        /*opacity: 1;*/
-    /*}*/
-
     .slider-volume::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
@@ -175,7 +171,7 @@
             </div>
 
             <h4 class="volume-range">Volume</h4>
-            <input type="range" min="0" max="2" onchange="setVolume(value)" step="0.02" value="0.5" class="slider-volume" id="myRange">
+            <input type="range" min="0" max="2" onchange="setVolume(value)" step="0.06" value="0.5" class="slider-volume" id="myRange">
 
             <h4 class="switch-bank" >Bank</h4>
             <label class="switch">
@@ -185,13 +181,10 @@
                        >
                 <span class="slider round"></span>
             </label>
-
-
-
         </div>
 
         <div>
-            <audio id="audio" src="" autoplay="false" ></audio>
+            <audio id="audio" src="" onvolumechange="" autoplay="false" ></audio>
         </div>
 
 

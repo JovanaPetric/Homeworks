@@ -128,7 +128,6 @@ function getSound(button) {
                }
            });
        }
-
    }
 
 }
